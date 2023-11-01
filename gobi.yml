@@ -1,0 +1,18 @@
+---
+plugin: netbox.netbox.nb_inventory
+api_endpoint: https://netbox01.thetnw.com
+token: 68294926d98746e50cfd4980518beb64b067e02f
+validate_certs: false
+config_context: true
+interfaces: true
+group_names_raw: true
+group_by:
+ - platforms
+ - tenants
+ - sites
+ - racks
+ - tags
+query_filters: []
+device_query_filters:
+ - has_primary_ip: 'true'
+flatten_custom_fields: true 

@@ -1,0 +1,27 @@
+---
+  - name: Initial Playbook
+    hosts: localhost
+    connection: local
+    gather_facts: no
+    
+    tasks:
+      - name: Create interfaces
+        uri:
+          url: "{{ netbox_url }}/api/dcim/interfaces/?name={{ item }}"
+          method: POST
+          headers:
+            Authorization: "Token {{ netbox_token }}"
+            Accept: 'application/json'
+          body_format: json
+          body:
+            device: 4
+            name: "{{ item }}"
+            site: "{{ site }}"
+            type: virtual
+            status_code: [200, 201]
+        loop: "{{ interfaces }}"
+ #       when:
+ #         - 
+#          - netbox_vendors.json.count == 0
+ #         - netbox_state == 'present'
+#        run_once: yes

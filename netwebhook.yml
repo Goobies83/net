@@ -1,0 +1,24 @@
+---
+- name: Netbox Webhook Testing
+  hosts: 
+    - "{{ device_id }}"
+  gather_facts: no
+  connection: network_cli
+
+  tasks:
+
+  - name: l2 Interface
+    ios_config:
+      parents:
+      - "{{ interface_id }}"
+      lines:
+       - description {{ description }}
+      after:
+       - exit
+       - exit
+       - write memory
+#      backup: yes
+    register: show_result
+
+  - name: Debug registered var
+    debug: var=show_result.stdout_lines
